@@ -419,10 +419,11 @@ function addComment(commentBody) {
     'https://nocors.intelpro.app/codeclashserver20230524010610.azurewebsites.net:443/Comments/add';
   const data = {
     username: username,
-    language: currentLanguage,
+    language: currentLanguage.replace("++", "plusplus"),
     snippetName: currentSnippet,
     commentBody: commentBody,
   };
+  console.log(JSON.stringify(data));
 
   fetch(url, {
     method: 'POST',
@@ -436,6 +437,6 @@ function addComment(commentBody) {
       console.log('Comment added:', json);
       alert('Comment added successfully!');
     })
-    .then(fetchComments(currentLanguage, currentSnippet))
+    .then(fetchComments(currentLanguage.replace("++", "plusplus"), currentSnippet))
     .catch((error) => console.error('Error:', error));
 }
