@@ -288,7 +288,10 @@ document.getElementById('logoutButton').addEventListener('click', function () {
 function fetchComments(language, snippet) {
   const encodedSnippet = encodeURIComponent(snippet);
   fetch(
-    `https://codeclashserver20230524010610.azurewebsites.net/Comments/get?language=${language}&snippet=${encodedSnippet}`
+    `https://codeclashserver20230524010610.azurewebsites.net/Comments/get?language=${language.replace(
+      '++',
+      'plusplus'
+    )}&snippet=${encodedSnippet}`
   )
     .then((response) => response.json())
     .then((json) => displayComments(json))
@@ -436,9 +439,9 @@ function addComment(commentBody) {
       console.log('Comment added');
       console.log(response);
     })
-    .then(() =>
-      {console.log("HERE!");
-      fetchComments(currentLanguage.replace('++', 'plusplus'), currentSnippet)}
-    )
+    .then(() => {
+      console.log('HERE!');
+      fetchComments(currentLanguage, currentSnippet);
+    })
     .catch((error) => console.error('Error:', error));
 }
