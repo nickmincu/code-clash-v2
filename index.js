@@ -415,6 +415,7 @@ document
     event.preventDefault();
     const commentBody = document.getElementById('commentBody').value;
     addComment(commentBody);
+    document.getElementById('commentBody').value = "";
   });
 
 function addComment(commentBody) {
@@ -436,11 +437,10 @@ function addComment(commentBody) {
     body: JSON.stringify(data),
   })
     .then((response) => {
-      console.log('Comment added');
+      console.log('Comment added:' + commentBody);
       console.log(response);
     })
     .then(() => {
-      console.log('HERE!');
       fetchComments(currentLanguage, currentSnippet);
     })
     .catch((error) => console.error('Error:', error));
