@@ -71,9 +71,10 @@ function setActiveButton(buttonId) {
       } else {
         button.classList.remove('active');
       }
-    } else {
-      console.error(`Button with ID "${id}" not found.`);
     }
+    // else {
+    //   console.log(`Button with ID "${id}" not found.`);
+    // }
   });
 }
 
@@ -204,7 +205,7 @@ function showComparison() {
 }
 
 function fetchData() {
-  console.log('fetch data');
+  // console.log('fetch data');
   return fetch(
     'https://raw.githubusercontent.com/nickmincu/code-clash/main/data.json'
   )
@@ -415,7 +416,7 @@ document
     event.preventDefault();
     const commentBody = document.getElementById('commentBody').value;
     addComment(commentBody);
-    document.getElementById('commentBody').value = "";
+    document.getElementById('commentBody').value = '';
   });
 
 function addComment(commentBody) {
