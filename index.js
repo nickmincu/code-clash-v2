@@ -288,7 +288,7 @@ document.getElementById('logoutButton').addEventListener('click', function () {
 function fetchComments(language, snippet) {
   const encodedSnippet = encodeURIComponent(snippet);
   fetch(
-    `https://nocors.intelpro.app/codeclashserver20230524010610.azurewebsites.net/Comments/get?language=${language}&snippet=${encodedSnippet}`
+    `https://codeclashserver20230524010610.azurewebsites.net/Comments/get?language=${language}&snippet=${encodedSnippet}`
   )
     .then((response) => response.json())
     .then((json) => displayComments(json))
@@ -416,10 +416,10 @@ document
 
 function addComment(commentBody) {
   const url =
-    'https://nocors.intelpro.app/codeclashserver20230524010610.azurewebsites.net:443/Comments/add';
+    'https://codeclashserver20230524010610.azurewebsites.net/Comments/add';
   const data = {
     username: username,
-    language: currentLanguage.replace("++", "plusplus"),
+    language: currentLanguage.replace('++', 'plusplus'),
     snippetName: currentSnippet,
     commentBody: commentBody,
   };
@@ -432,11 +432,13 @@ function addComment(commentBody) {
     },
     body: JSON.stringify(data),
   })
-    .then((response) => response.json())
-    .then((json) => {
-      console.log('Comment added:', json);
-      alert('Comment added successfully!');
+    .then((response) => {
+      console.log('Comment added');
+      console.log(response);
     })
-    .then(fetchComments(currentLanguage.replace("++", "plusplus"), currentSnippet))
+    .then(() =>
+      {console.log("HERE!");
+      fetchComments(currentLanguage.replace('++', 'plusplus'), currentSnippet)}
+    )
     .catch((error) => console.error('Error:', error));
 }
