@@ -1,0 +1,199 @@
+{
+  "javascript": {
+    "name": "JavaScript",
+    "wiki": "https://en.wikipedia.org/wiki/JavaScript",
+    "description": "JavaScript is a lightweight, interpreted, or just-in-time compiled programming language...",
+    "performance": "Medium",
+    "ease_of_use": "High",
+    "popularity": "High",
+    "community_support": "High",
+    "snippets": [
+      {
+        "title": "Hello, World!",
+        "code": "console.log('Hello, World!');"
+      },
+      {
+        "title": "For Loop",
+        "code": "for (let i = 0; i < 10; i++) {\n    console.log(i);\n}"
+      },
+      {
+        "title": "If Statement",
+        "code": "let x = 42;\nif (x > 0) {\n    console.log('x is positive');\n} else {\n    console.log('x is not positive');\n}"
+      },
+      {
+        "title": "Switch Statement",
+        "code": "let x = 1;\nswitch (x) {\n    case 0:\n        console.log('x is zero');\n        break;\n    case 1:\n        console.log('x is one');\n        break;\n    default:\n        console.log('x is neither zero nor one');\n        break;\n}"
+      }
+    ]
+  },
+  "dotnet": {
+    "name": "DotNet",
+    "wiki": "https://en.wikipedia.org/wiki/.NET",
+    "description": "DotNet is a programming framework developed by Microsoft...",
+    "performance": "High",
+    "ease_of_use": "Medium",
+    "popularity": "High",
+    "community_support": "High",
+    "snippets": [
+      {
+        "title": "Hello, World!",
+        "code": "using System;\n\npublic class Program {\n    public static void Main() {\n        Console.WriteLine(\"Hello, World!\");\n    }\n}"
+      },
+      {
+        "title": "For Loop",
+        "code": "for (int i = 0; i < 10; i++) {\n    Console.WriteLine(i);\n}"
+      },
+      {
+        "title": "If Statement",
+        "code": "int x = 42;\nif (x > 0) {\n    Console.WriteLine(\"x is positive\");\n} else {\n    Console.WriteLine(\"x is not positive\");\n}"
+      },
+      {
+        "title": "Switch Statement",
+        "code": "int x = 1;\nswitch (x) {\n    case 0:\n        Console.WriteLine(\"x is zero\");\n        break;\n    case 1:\n        Console.WriteLine(\"x is one\");\n        break;\n    default:\n        Console.WriteLine(\"x is neither zero nor one\");\n        break;\n}"
+      },
+      {
+        "title": "test Statement",
+        "code": "todo"
+      }
+    ]
+  },
+  "java": {
+    "name": "Java",
+    "wiki": "https://en.wikipedia.org/wiki/Java_(programming_language)",
+    "description": "Java is a popular, versatile and platform-independent programming language...",
+    "performance": "High",
+    "ease_of_use": "Medium",
+    "popularity": "High",
+    "community_support": "High",
+    "snippets": [
+      {
+        "title": "Hello, World!",
+        "code": "public class HelloWorld {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }\n}"
+      },
+      {
+        "title": "For Loop",
+        "code": "for (int i = 0; i < 10; i++) {\n    System.out.println(i);\n}"
+      },
+      {
+        "title": "If Statement",
+        "code": "int x = 42;\nif (x > 0) {\n    System.out.println(\"x is positive\");\n} else {\n    System.out.println(\"x is not positive\");\n}"
+      },
+      {
+        "title": "test",
+        "code": "test"
+      },
+      {
+        "title": "Switch Statement",
+        "code": "int x = 1;\nswitch (x) {\n    case 0:\n        System.out.println(\"x is zero\");\n        break;\n    case 1:\n        System.out.println(\"x is one\");\n        break;\n    default:\n        System.out.println(\"x is neither zero nor one\");\n        break;\n}"
+      }
+    ]
+  },
+  "python": {
+    "name": "Python",
+    "wiki": "https://en.wikipedia.org/wiki/Python_(programming_language)",
+    "description": "Python is a powerful, high-level, easy-to-learn programming language...",
+    "performance": "Medium",
+    "ease_of_use": "High",
+    "popularity": "High",
+    "community_support": "High",
+    "snippets": [
+      {
+        "title": "Hello, World!",
+        "code": "print(\"Hello, World!\")"
+      },
+      {
+        "title": "For Loop",
+        "code": "for i in range(10):\n    print(i)"
+      },
+      {
+        "title": "If Statement",
+        "code": "x = 42\nif x > 0:\n    print(\"x is positive\")\nelse:\n    print(\"x is not positive\")"
+      },
+      {
+        "title": "Switch Statement",
+        "code": "def switch_case(x):\n    return {\n        0: \"x is zero\",\n        1: \"x is one\"\n    }.get(x, \"x is neither zero nor one\")\n\nx = 1\nprint(switch_case(x))"
+      }
+    ]
+  },
+  "ruby": {
+    "name": "Ruby",
+    "wiki": "https://en.wikipedia.org/wiki/Ruby_(programming_language)",
+    "description": "Ruby is a dynamic, open-source programming language with a focus on simplicity and productivity...",
+    "performance": "Medium",
+    "ease_of_use": "High",
+    "popularity": "Medium",
+    "community_support": "High",
+    "snippets": [
+      {
+        "title": "Hello, World!",
+        "code": "puts 'Hello, World!'"
+      },
+      {
+        "title": "For Loop",
+        "code": "10.times do |i|\n  puts i\nend"
+      },
+      {
+        "title": "If Statement",
+        "code": "x = 42\nif x > 0\n  puts 'x is positive'\nelse\n  puts 'x is not positive'\nend"
+      },
+      {
+        "title": "Switch Statement",
+        "code": "todo"
+      }
+    ]
+  },
+  "cpp": {
+    "name": "C++",
+    "wiki": "https://en.wikipedia.org/wiki/C%2B%2B",
+    "description": "C++ is a general-purpose programming language created as an extension of the C programming language...",
+    "performance": "High",
+    "ease_of_use": "Low",
+    "popularity": "High",
+    "community_support": "High",
+    "snippets": [
+      {
+        "title": "Hello, World!",
+        "code": "#include <iostream>\n\nint main() {\n    std::cout << \"Hello, World!\" << std::endl;\n    return 0;\n}"
+      },
+      {
+        "title": "For Loop",
+        "code": "#include <iostream>\n\nint main() {\n    for (int i = 0; i < 10; i++) {\n        std::cout << i << std::endl;\n    }\n    return 0;\n}"
+      },
+      {
+        "title": "If Statement",
+        "code": "#include <iostream>\n\nint main() {\n    int x = 42;\n    if (x > 0) {\n        std::cout << \"x is positive\" << std::endl;\n    } else {\n        std::cout << \"x is not positive\" << std::endl;\n    }\n    return 0;\n}"
+      },
+      {
+        "title": "Switch Statement",
+        "code": "todo"
+      }
+    ]
+  },
+  "rust": {
+    "name": "Rust",
+    "wiki": "https://en.wikipedia.org/wiki/Rust_(programming_language)",
+    "description": "Rust is a multi-paradigm, high-level, general-purpose programming language. Rust emphasizes performance, type safety, and concurrency. Rust enforces memory safety—that is, that all references point to valid memory—without requiring the use of a garbage collector or reference counting present in other memory-safe languages.",
+    "performance": "High",
+    "ease_of_use": "Low",
+    "popularity": "High",
+    "community_support": "High",
+    "snippets": [
+      {
+        "title": "Hello, World!",
+        "code": "fn main() {\n    println!(\"Hello, world!\");\n}"
+      },
+      {
+        "title": "For Loop",
+        "code": "fn main() {\n    let numbers = [1, 2, 3, 4, 5];\n\n    for number in numbers.iter() {\n        println!(\"The number is {}\", number);\n    }\n}"
+      },
+      {
+        "title": "If Statement",
+        "code": "fn main() {\n    let number = 5;\n\n    if number < 10 {\n        println!(\"The number is less than 10\");\n    } else {\n        println!(\"The number is greater than or equal to 10\");\n    }\n}"
+      },
+      {
+        "title": "Switch Statement",
+        "code": "fn main() {\n    let number = 2;\n\n    match number {\n        1 => println!(\"The number is one\"),\n        2 => println!(\"The number is two\"),\n        3 => println!(\"The number is three\"),\n        _ => println!(\"The number is something else\"),\n    }\n}"
+      }
+    ]
+  }
+}
