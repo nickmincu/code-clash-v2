@@ -159,6 +159,24 @@ button:hover {
   color: #222;
 }
 
+.label-like-button {
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+
+.label-like-button:hover {
+  text-decoration: none;
+  background: none;
+  color: rgb(32, 168, 221);
+}
+
 footer {
   background-color: rgba(51, 51, 51, 0.4);
   color: rgba(91, 91, 91, 0.8);
