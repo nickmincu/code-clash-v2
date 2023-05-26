@@ -10,7 +10,7 @@ body {
 h2 {
   color: #f7c924;
   text-align: center;
-  font-size: larger;
+  font-size: xx-large;
 }
 
 h3 {
@@ -230,7 +230,7 @@ footer p {
   display: flex;
   justify-content: flex-end;
   padding: 10px;
-  background-color: #181717;
+  background-color: #333;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
