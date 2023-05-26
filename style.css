@@ -328,4 +328,28 @@ footer p {
   nav.show-menu ul {
     display: block;
   }
+/* 
+  #loginForm {
+    display: inherit;
+  }
+
+  #user-icon {
+    margin-left: 70px;
+  }
+
+ */
+ #loginForm {
+  flex-direction: column; /* Set the direction of the form elements to columnar */
+}
+
+#loginForm label,
+#loginForm input {
+  display: block; /* Set the labels and inputs to display as block elements */
+  margin: 5px 0; /* Adjust the margin for better spacing */
+}
+
+#user-icon {
+  margin-top: 10px; /* Add top margin to separate the button from input fields */
+}
+
 }
