@@ -446,3 +446,43 @@ function addComment(commentBody) {
     })
     .catch((error) => console.error('Error:', error));
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const loginForm = document.getElementById('loginForm');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  const logoutContainer = document.getElementById('logoutContainer');
+  const logoutButton = document.getElementById('logoutButton');
+  const userIcon = document.getElementById('user-icon');
+
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    loginUser(emailInput.value, passwordInput.value);
+  });
+
+  logoutButton.addEventListener('click', () => {
+    logoutUser();
+  });
+
+  userIcon.addEventListener('click', () => {
+    toggleLoginForm();
+  });
+
+  function loginUser(email, password) {
+    // Check email and password (implement your logic)
+    if (email === 'example@example.com' && password === 'password') {
+      toggleLoginForm();
+    }
+  }
+
+  function logoutUser() {
+    toggleLoginForm();
+  }
+
+  function toggleLoginForm() {
+    loginForm.style.display =
+      loginForm.style.display === 'none' ? 'block' : 'none';
+    logoutContainer.style.display =
+      logoutContainer.style.display === 'none' ? 'block' : 'none';
+  }
+});

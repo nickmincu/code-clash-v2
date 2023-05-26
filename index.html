@@ -7,19 +7,44 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="app"></div>
-    <form id="loginForm">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required />
-      <br />
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required />
-      <br />
-      <button type="submit">Login</button>
-    </form>
-    <div id="logoutContainer" style="display: none">
-      <button id="logoutButton">Logout</button>
+    <div id="top-bar">
+
+      <div id="top-bar">
+        <form id="loginForm">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+          <button type="submit">Login</button>
+        </form>
+        <div id="logoutContainer" style="display: none">
+          <button id="logoutButton">Logout</button>
+        </div>
+        <div id="user-icon">
+          <i class="fas fa-user-circle"></i>
+        </div>
+      </div>
+
+      <div id="user-icon">
+        <i class="fas fa-user-circle"></i>
+      </div>
     </div>
+    <div id="app"></div>
+
+    <!-- <div class="loginbox">
+      <form id="loginForm">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+        <br />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+        <br />
+        <button type="submit">Login</button>
+      </form>
+      <div id="logoutContainer" style="display: none">
+        <button id="logoutButton">Logout</button>
+      </div>
+    </div> -->
 
     <nav>
       <div class="hamburger-menu">
@@ -54,7 +79,13 @@
       <h1>Add Comment</h1>
       <form id="commentForm">
         <label for="commentBody">Comment:</label>
-        <textarea id="commentBody" name="commentBody" rows="1" cols="80" required></textarea> 
+        <textarea
+          id="commentBody"
+          name="commentBody"
+          rows="1"
+          cols="80"
+          required
+        ></textarea>
         <br />
         <button type="submit">Submit Comment</button>
       </form>
