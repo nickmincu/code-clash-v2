@@ -282,6 +282,17 @@ document
     loginUser(email, password);
   });
 
+document
+  .getElementById('signupForm')
+  .addEventListener('submit', function (event) {
+    event.preventDefault();
+    signupUser(event);
+  });
+
+document.getElementById('signup').addEventListener('click', function () {
+  signupState();
+});
+
 document.getElementById('logoutButton').addEventListener('click', function () {
   logoutUser();
 });
@@ -374,19 +385,76 @@ function loginUser(email, password) {
     .then((response) => response.json())
     .then((result) => {
       console.log(result);
+      if (result.error) {
+        throw new Error(result.error.message);
+      }
       globalIdToken = result.idToken; // Save the JWT token
       username = email;
       loggedInState();
     })
     .catch((error) => {
       console.log('error', error);
-      globalIdToken = email;
-      loggedInState();
+      alert(error);
+      //globalIdToken = email;
+      //loggedInState();
+      logoutUser();
+    });
+}
+
+function signupUser(event) {
+  console.log('here' + event);
+  event.preventDefault();
+
+  const email = document.getElementById('emailsignup').value;
+  const password1 = document.getElementById('password1').value;
+  const password2 = document.getElementById('password2').value;
+  const url =
+    'https://nocors.intelpro.app/www.googleapis.com:443/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCvgi15qvHrBSTR83IQJzoVyzdOtLpzFWU';
+
+  if (password1 !== password2) {
+    alert('The passwords do not match.');
+    return;
+  }
+
+  if (password1.length < 6) {
+    alert('WEAK_PASSWORD : Password should be at least 6 characters');
+    return;
+  }
+
+  const payload = {
+    email: email,
+    password: password1,
+    //returnSecureToken: true,
+  };
+
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      //origin: 'https://js-b7vvkk.stackblitz.io',
+    },
+    body: JSON.stringify(payload),
+    redirect: 'follow',
+  })
+    .then((response) => {
+      console.log(response);
+      //globalIdToken = result.idToken; // Save the JWT token
+      //username = email;
+      logoutUser();
+      // handle after successful submission
+      alert('Signup successful!');
+    })
+    .catch((error) => {
+      console.error(error);
+      alert(
+        'Something went wrong. Maybe the email is already registered? Please try again later.'
+      );
     });
 }
 
 function loggedInState() {
   document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('signupContainer').style.display = 'none';
   document.getElementById('logoutContainer').style.display = 'block';
   document.getElementById('addComments').style.display = 'block';
 }
@@ -394,6 +462,14 @@ function loggedInState() {
 function logoutUser() {
   globalIdToken = null;
   document.getElementById('loginForm').style.display = 'block';
+  document.getElementById('signupContainer').style.display = 'none';
+  document.getElementById('logoutContainer').style.display = 'none';
+  document.getElementById('addComments').style.display = 'none';
+}
+
+function signupState() {
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('signupContainer').style.display = 'block';
   document.getElementById('logoutContainer').style.display = 'none';
   document.getElementById('addComments').style.display = 'none';
 }
@@ -446,43 +522,3 @@ function addComment(commentBody) {
     })
     .catch((error) => console.error('Error:', error));
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  const loginForm = document.getElementById('loginForm');
-  const emailInput = document.getElementById('email');
-  const passwordInput = document.getElementById('password');
-  const logoutContainer = document.getElementById('logoutContainer');
-  const logoutButton = document.getElementById('logoutButton');
-  const userIcon = document.getElementById('user-icon');
-
-  loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    loginUser(emailInput.value, passwordInput.value);
-  });
-
-  logoutButton.addEventListener('click', () => {
-    logoutUser();
-  });
-
-  userIcon.addEventListener('click', () => {
-    toggleLoginForm();
-  });
-
-  function loginUser(email, password) {
-    // Check email and password (implement your logic)
-    if (email === 'example@example.com' && password === 'password') {
-      toggleLoginForm();
-    }
-  }
-
-  function logoutUser() {
-    toggleLoginForm();
-  }
-
-  function toggleLoginForm() {
-    loginForm.style.display =
-      loginForm.style.display === 'none' ? 'block' : 'none';
-    logoutContainer.style.display =
-      logoutContainer.style.display === 'none' ? 'block' : 'none';
-  }
-});
