@@ -453,7 +453,7 @@ function signupUser(event) {
 }
 
 function loggedInState() {
-  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('loginContainer').style.display = 'none';
   document.getElementById('signupContainer').style.display = 'none';
   document.getElementById('logoutContainer').style.display = 'block';
   document.getElementById('addComments').style.display = 'block';
@@ -461,14 +461,14 @@ function loggedInState() {
 
 function logoutUser() {
   globalIdToken = null;
-  document.getElementById('loginForm').style.display = 'block';
+  document.getElementById('loginContainer').style.display = 'block';
   document.getElementById('signupContainer').style.display = 'none';
   document.getElementById('logoutContainer').style.display = 'none';
   document.getElementById('addComments').style.display = 'none';
 }
 
 function signupState() {
-  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('loginContainer').style.display = 'none';
   document.getElementById('signupContainer').style.display = 'block';
   document.getElementById('logoutContainer').style.display = 'none';
   document.getElementById('addComments').style.display = 'none';
