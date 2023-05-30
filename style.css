@@ -299,9 +299,17 @@ footer p {
 
 
 .star {
-  font-size: 30px;
+  font-size: 40px;
   cursor: pointer;
+  background: none;
+  color: gray;
+  background: none;
+  border: none;  
+  padding: 0;
+  margin: 0px 0px 0px;
+  outline: none;
 }
+
 .yellow {
   color: gold;
 }

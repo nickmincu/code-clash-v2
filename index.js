@@ -85,57 +85,6 @@ let username;
 let currentLanguage;
 let currentSnippet;
 
-
-
-// favorites
-
-const starBtn = document.getElementById('starBtn');
-
-        async function fetchIsFavorite() {
-            const response = await fetch("https://codeclashserver20230524010610.azurewebsites.net/Favorites/isfavorite", {
-                method: "POST",
-                headers: {"Content-Type": "application/json-patch+json"},
-                body: JSON.stringify({
-                    "username": "user_a@gmail.com",
-                    "language": "JavaScript",
-                    "snippetName": "Hello, World!"
-                }),
-            });
-
-            if (response.ok && await response.json()) {
-                starBtn.classList.add('yellow');
-            }
-        }
-
-        async function toggleStar() {
-            const url = starBtn.classList.contains('yellow')
-                ? "https://codeclashserver20230524010610.azurewebsites.net/Favorites/remove"
-                : "https://codeclashserver20230524010610.azurewebsites.net/Favorites/add";
-
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {"Content-Type": "application/json-patch+json"},
-                body: JSON.stringify({
-                    "username": "user_a@gmail.com",
-                    "language": "JavaScript",
-                    "snippetName": "Hello, World!"
-                }),
-            });
-
-            if (response.ok) {
-                starBtn.classList.toggle('yellow');
-            }
-        }
-        
-        fetchIsFavorite();
-        starBtn.addEventListener('click', toggleStar);
-
-
-
-// end favorites
-
-
-
 function showComparison() {
   fetchData().then((data) => {
     content.innerHTML = `
@@ -292,10 +241,17 @@ function showLanguage(language) {
                 .join('')}
           </select>
           </div>
-          <pre id="snippetCode">${langData.snippets[0].code}</pre>`;
+          <div>
+          <button id="favoritesBtn" title="Bookmark on/off" class="star">☆</button><pre id="snippetCode">${
+            langData.snippets[0].code
+          }</pre>
+          </div>`;
+
     currentLanguage = langData.name;
     currentSnippet = langData.snippets[0].title;
     fetchComments(currentLanguage, currentSnippet);
+    favoritesButtonLogic(username, currentLanguage, currentSnippet);
+
     document
       .getElementById('snippet')
       .addEventListener('change', function (event) {
@@ -306,8 +262,113 @@ function showLanguage(language) {
         currentLanguage = langData.name;
         currentSnippet = langData.snippets[snippetIndex].title;
         fetchComments(currentLanguage, currentSnippet);
+
+        favoritesButtonLogic(username, currentLanguage, currentSnippet);
+        //   // favorites
+        //   const favoritesBtn = document.getElementById('favoritesBtn');
+
+        //   // hide the bookmark button if the username is not defined (when is not logged in)
+        //   if (username == undefined) {
+        //     favoritesBtn.style.display = 'none';
+        //   } else favoritesBtn.style.display = 'block';
+
+        //   async function fetchIsBtnFavorite() {
+        //     const response = await fetch(
+        //       'https://codeclashserver20230524010610.azurewebsites.net/Favorites/isfavorite',
+        //       {
+        //         method: 'POST',
+        //         headers: { 'Content-Type': 'application/json-patch+json' },
+        //         body: JSON.stringify({
+        //           username: username,
+        //           language: currentLanguage,
+        //           snippetName: currentSnippet,
+        //         }),
+        //       }
+        //     );
+
+        //     if (response.ok && (await response.json())) {
+        //       favoritesBtn.classList.add('yellow');
+        //     } else favoritesBtn.classList.remove('yellow');
+        //   }
+
+        //   async function toggleBtnStar() {
+        //     const url = favoritesBtn.classList.contains('yellow')
+        //       ? 'https://codeclashserver20230524010610.azurewebsites.net/Favorites/remove'
+        //       : 'https://codeclashserver20230524010610.azurewebsites.net/Favorites/add';
+
+        //     const response = await fetch(url, {
+        //       method: 'POST',
+        //       headers: { 'Content-Type': 'application/json-patch+json' },
+        //       body: JSON.stringify({
+        //         username: username,
+        //         language: currentLanguage,
+        //         snippetName: currentSnippet,
+        //       }),
+        //     });
+
+        //     if (response.ok) {
+        //       favoritesBtn.classList.toggle('yellow');
+        //     }
+        //   }
+        //   fetchIsBtnFavorite();
+        //   favoritesBtn.addEventListener('click', toggleBtnStar);
+
+        //  // end favorites
       });
   });
+}
+
+function favoritesButtonLogic(user, language, snippetName) {
+  // favorites
+  const favoritesBtn = document.getElementById('favoritesBtn');
+
+  // hide the bookmark button if the username is not defined (when is not logged in)
+  if (username == undefined) {
+    favoritesBtn.style.display = 'none';
+  } else favoritesBtn.style.display = 'block';
+
+  async function fetchIsBtnFavorite() {
+    const response = await fetch(
+      'https://codeclashserver20230524010610.azurewebsites.net/Favorites/isfavorite',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json-patch+json' },
+        body: JSON.stringify({
+          username: user,
+          language: language,
+          snippetName: snippetName,
+        }),
+      }
+    );
+
+    if (response.ok && (await response.json())) {
+      favoritesBtn.classList.add('yellow');
+    } else favoritesBtn.classList.remove('yellow');
+  }
+
+  async function toggleBtnStar() {
+    const url = favoritesBtn.classList.contains('yellow')
+      ? 'https://codeclashserver20230524010610.azurewebsites.net/Favorites/remove'
+      : 'https://codeclashserver20230524010610.azurewebsites.net/Favorites/add';
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json-patch+json' },
+      body: JSON.stringify({
+        username: user,
+        language: language,
+        snippetName: snippetName,
+      }),
+    });
+
+    if (response.ok) {
+      favoritesBtn.classList.toggle('yellow');
+    }
+  }
+  fetchIsBtnFavorite();
+  favoritesBtn.addEventListener('click', toggleBtnStar);
+
+  // end favorites
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -512,10 +573,12 @@ function loggedInState() {
 
 function logoutUser() {
   globalIdToken = null;
+  username = undefined;
   document.getElementById('loginContainer').style.display = 'block';
   document.getElementById('signupContainer').style.display = 'none';
   document.getElementById('logoutContainer').style.display = 'none';
   document.getElementById('addComments').style.display = 'none';
+  document.getElementById('favoritesBtn').style.display = 'none';
 }
 
 function signupState() {
