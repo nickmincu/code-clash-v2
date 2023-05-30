@@ -85,48 +85,180 @@ let username;
 let currentLanguage;
 let currentSnippet;
 
+async function fetchFavorites(username) {
+  if (username === undefined) {
+    return [];
+  }
+  const response = await fetch(
+    `https://codeclashserver20230524010610.azurewebsites.net/Favorites/get?username=${encodeURIComponent(
+      username
+    )}`
+  );
+  const favorites = await response.json();
+  return favorites;
+}
+
 function showComparison() {
-  fetchData().then((data) => {
+  fetchData().then(async (data) => {
+    // Fetch favorite snippets
+    const favorites = await fetchFavorites(username);
+    console.log(favorites);
+
+    // Function to check if a snippet is a favorite
+    const isFavorite = (languageName, snippetTitle) => {
+      return favorites.some(
+        (favorite) =>
+          favorite.language === languageName &&
+          favorite.snippetName === snippetTitle
+      );
+    };
+
+    //         // Custom templating function for Select2
+    //         function formatSnippet(snippet) {
+
+    //           if (!snippet.element) {
+    //             return snippet.text;
+    //           }
+
+    //           const { lang, name, title, hasStar } = snippet.element.dataset;
+    //           return $(
+    //             `<span>${name} - ${title}${hasStar === "true" ? '<span style="color: yellow;"> ★</span>' : ""}</span>`
+    //           );
+    //         }
+
+    //         content.innerHTML = `
+    //           <label for="snippet1">Languages</label>
+    //           <div class="select-wrapper">
+    //             <select id="snippet1">
+    //                 ${Object.keys(data)
+    //                   .map(
+    //                     (lang) =>
+    //                       `<optgroup label="${data[lang].name}">${data[
+    //                         lang
+    //                       ].snippets
+    //                         .map(
+    //                           (snippet, index) =>
+    //                             `<option value="${lang}-${index}" data-lang="${lang}" data-name="${data[lang].name}" data-title="${snippet.title}" data-has-star="${isFavorite(
+    //                               data[lang].name,
+    //                               snippet.title
+    //                             )}">${data[lang].name} - ${snippet.title}</option>`
+    //                         )
+    //                         .join("")}</optgroup>`
+    //                   )
+    //                   .join("")}
+    //             </select>
+    //           </div>
+    //           <div class="select-wrapper">
+    //             <select id="snippet2">
+    //                 ${Object.keys(data)
+    //                   .map(
+    //                     (lang) =>
+    //                       `<optgroup label="${data[lang].name}">${data[
+    //                         lang
+    //                       ].snippets
+    //                         .map(
+    //                           (snippet, index) =>
+    //                             `<option value="${lang}-${index}" data-lang="${lang}" data-name="${data[lang].name}" data-title="${snippet.title}" data-has-star="${isFavorite(
+    //                               data[lang].name,
+    //                               snippet.title
+    //                             )}">${data[lang].name} - ${snippet.title}</option>`
+    //                         )
+    //                         .join("")}</optgroup>`
+    //                   )
+    //                   .join("")}
+    //             </select>
+    //           </div>
+    //           <div id="comparisonResult"></div>
+    //         `;
+    // // Add this line right after setting the content.innerHTML
+    //  // Initialize Select2 with custom templating
+    //  $("#snippet1, #snippet2").select2({
+    //   templateResult: formatSnippet,
+    // });
     content.innerHTML = `
-          <label for="snippet1">Languages</label>
-          <div class="select-wrapper">
-            <select id="snippet1">
-                ${Object.keys(data)
-                  .map(
-                    (lang) =>
-                      `<optgroup label="${data[lang].name}">${data[
-                        lang
-                      ].snippets
-                        .map(
-                          (snippet, index) =>
-                            `<option value="${lang}-${index}">${data[lang].name} - ${snippet.title}</option>`
-                        )
-                        .join('')}</optgroup>`
-                  )
-                  .join('')}
-            </select>
-          </div>
-          <!-- <label for="snippet2"> vs</label> -->
-          <div class="select-wrapper">
-            <select id="snippet2">
-                ${Object.keys(data)
-                  .map(
-                    (lang) =>
-                      `<optgroup label="${data[lang].name}">${data[
-                        lang
-                      ].snippets
-                        .map(
-                          (snippet, index) =>
-                            `<option value="${lang}-${index}">${data[lang].name} - ${snippet.title}</option>`
-                        )
-                        .join('')}</optgroup>`
-                  )
-                  .join('')}
-            </select>
-          </div>
-        <!--  <button id="compareBtn">Compare</button> -->
-          <div id="comparisonResult"></div>
-      `;
+      <label for="snippet1">Languages</label>
+      <div class="select-wrapper">
+        <select id="snippet1">
+            ${Object.keys(data)
+              .map(
+                (lang) =>
+                  `<optgroup label="${data[lang].name}">${data[lang].snippets
+                    .map(
+                      (snippet, index) =>
+                        `<option value="${lang}-${index}">${
+                          data[lang].name
+                        } - ${snippet.title}${
+                          isFavorite(data[lang].name, snippet.title) ? ' ★' : ''
+                        }</option>`
+                    )
+                    .join('')}</optgroup>`
+              )
+              .join('')}
+        </select>
+      </div>
+      <!-- <label for="snippet2"> vs</label> -->
+      <div class="select-wrapper">
+        <select id="snippet2">
+            ${Object.keys(data)
+              .map(
+                (lang) =>
+                  `<optgroup label="${data[lang].name}">${data[lang].snippets
+                    .map(
+                      (snippet, index) =>
+                        `<option value="${lang}-${index}">${
+                          data[lang].name
+                        } - ${snippet.title}${
+                          isFavorite(data[lang].name, snippet.title) ? ' ★' : ''
+                        }</option>`
+                    )
+                    .join('')}</optgroup>`
+              )
+              .join('')}
+        </select>
+      </div>
+      <div id="comparisonResult"></div>
+    `;
+
+    // content.innerHTML = `
+    //       <label for="snippet1">Languages</label>
+    //       <div class="select-wrapper">
+    //         <select id="snippet1">
+    //             ${Object.keys(data)
+    //               .map(
+    //                 (lang) =>
+    //                   `<optgroup label="${data[lang].name}">${data[
+    //                     lang
+    //                   ].snippets
+    //                     .map(
+    //                       (snippet, index) =>
+    //                         `<option value="${lang}-${index}">${data[lang].name} - ${snippet.title}</option>`
+    //                     )
+    //                     .join('')}</optgroup>`
+    //               )
+    //               .join('')}
+    //         </select>
+    //       </div>
+    //       <!-- <label for="snippet2"> vs</label> -->
+    //       <div class="select-wrapper">
+    //         <select id="snippet2">
+    //             ${Object.keys(data)
+    //               .map(
+    //                 (lang) =>
+    //                   `<optgroup label="${data[lang].name}">${data[
+    //                     lang
+    //                   ].snippets
+    //                     .map(
+    //                       (snippet, index) =>
+    //                         `<option value="${lang}-${index}">${data[lang].name} - ${snippet.title}</option>`
+    //                     )
+    //                     .join('')}</optgroup>`
+    //               )
+    //               .join('')}
+    //         </select>
+    //       </div>
+    //     <!--  <button id="compareBtn">Compare</button> -->
+    //       <div id="comparisonResult"></div>
+    //   `;
 
     function compare() {
       const [lang1, snippetIndex1] = document
@@ -207,7 +339,7 @@ function showComparison() {
 function fetchData() {
   // console.log('fetch data');
   return fetch(
-    'https://raw.githubusercontent.com/nickmincu/code-clash/main/data.json'
+    'https://raw.githubusercontent.com/nickmincu/code-clash-v2/main/data.json'
   )
     .then((response) => response.json())
     .catch((error) => console.error('Error fetching data:', error));
@@ -317,7 +449,7 @@ function favoritesButtonLogic(user, language, snippetName) {
     }
   }
   fetchIsBtnFavorite();
-  
+
   if (favBtnHandle != undefined) {
     // remove the previously assigned event handler
     favoritesBtn.removeEventListener('click', favBtnHandle);
@@ -464,7 +596,7 @@ function loginUser(email, password) {
       }
       globalIdToken = result.idToken; // Save the JWT token
       username = email;
-      loggedInState();      
+      loggedInState();
     })
     .catch((error) => {
       console.log('error', error);
@@ -530,7 +662,7 @@ function loggedInState() {
   document.getElementById('loginContainer').style.display = 'none';
   document.getElementById('signupContainer').style.display = 'none';
   document.getElementById('logoutContainer').style.display = 'block';
-  document.getElementById('addComments').style.display = 'block';  
+  document.getElementById('addComments').style.display = 'block';
   favoritesButtonLogic(username, currentLanguage, currentSnippet);
 }
 
