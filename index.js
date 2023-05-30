@@ -113,68 +113,6 @@ function showComparison() {
       );
     };
 
-    //         // Custom templating function for Select2
-    //         function formatSnippet(snippet) {
-
-    //           if (!snippet.element) {
-    //             return snippet.text;
-    //           }
-
-    //           const { lang, name, title, hasStar } = snippet.element.dataset;
-    //           return $(
-    //             `<span>${name} - ${title}${hasStar === "true" ? '<span style="color: yellow;"> ★</span>' : ""}</span>`
-    //           );
-    //         }
-
-    //         content.innerHTML = `
-    //           <label for="snippet1">Languages</label>
-    //           <div class="select-wrapper">
-    //             <select id="snippet1">
-    //                 ${Object.keys(data)
-    //                   .map(
-    //                     (lang) =>
-    //                       `<optgroup label="${data[lang].name}">${data[
-    //                         lang
-    //                       ].snippets
-    //                         .map(
-    //                           (snippet, index) =>
-    //                             `<option value="${lang}-${index}" data-lang="${lang}" data-name="${data[lang].name}" data-title="${snippet.title}" data-has-star="${isFavorite(
-    //                               data[lang].name,
-    //                               snippet.title
-    //                             )}">${data[lang].name} - ${snippet.title}</option>`
-    //                         )
-    //                         .join("")}</optgroup>`
-    //                   )
-    //                   .join("")}
-    //             </select>
-    //           </div>
-    //           <div class="select-wrapper">
-    //             <select id="snippet2">
-    //                 ${Object.keys(data)
-    //                   .map(
-    //                     (lang) =>
-    //                       `<optgroup label="${data[lang].name}">${data[
-    //                         lang
-    //                       ].snippets
-    //                         .map(
-    //                           (snippet, index) =>
-    //                             `<option value="${lang}-${index}" data-lang="${lang}" data-name="${data[lang].name}" data-title="${snippet.title}" data-has-star="${isFavorite(
-    //                               data[lang].name,
-    //                               snippet.title
-    //                             )}">${data[lang].name} - ${snippet.title}</option>`
-    //                         )
-    //                         .join("")}</optgroup>`
-    //                   )
-    //                   .join("")}
-    //             </select>
-    //           </div>
-    //           <div id="comparisonResult"></div>
-    //         `;
-    // // Add this line right after setting the content.innerHTML
-    //  // Initialize Select2 with custom templating
-    //  $("#snippet1, #snippet2").select2({
-    //   templateResult: formatSnippet,
-    // });
     content.innerHTML = `
       <label for="snippet1">Languages</label>
       <div class="select-wrapper">
@@ -218,47 +156,6 @@ function showComparison() {
       </div>
       <div id="comparisonResult"></div>
     `;
-
-    // content.innerHTML = `
-    //       <label for="snippet1">Languages</label>
-    //       <div class="select-wrapper">
-    //         <select id="snippet1">
-    //             ${Object.keys(data)
-    //               .map(
-    //                 (lang) =>
-    //                   `<optgroup label="${data[lang].name}">${data[
-    //                     lang
-    //                   ].snippets
-    //                     .map(
-    //                       (snippet, index) =>
-    //                         `<option value="${lang}-${index}">${data[lang].name} - ${snippet.title}</option>`
-    //                     )
-    //                     .join('')}</optgroup>`
-    //               )
-    //               .join('')}
-    //         </select>
-    //       </div>
-    //       <!-- <label for="snippet2"> vs</label> -->
-    //       <div class="select-wrapper">
-    //         <select id="snippet2">
-    //             ${Object.keys(data)
-    //               .map(
-    //                 (lang) =>
-    //                   `<optgroup label="${data[lang].name}">${data[
-    //                     lang
-    //                   ].snippets
-    //                     .map(
-    //                       (snippet, index) =>
-    //                         `<option value="${lang}-${index}">${data[lang].name} - ${snippet.title}</option>`
-    //                     )
-    //                     .join('')}</optgroup>`
-    //               )
-    //               .join('')}
-    //         </select>
-    //       </div>
-    //     <!--  <button id="compareBtn">Compare</button> -->
-    //       <div id="comparisonResult"></div>
-    //   `;
 
     function compare() {
       const [lang1, snippetIndex1] = document
@@ -313,10 +210,6 @@ function showComparison() {
       //fetchComments('', '');
     }
 
-    // document
-    //   .getElementById('compareBtn')
-    //   .addEventListener('click', () => compare());
-
     const secondLanguageKey = Object.keys(data)[1];
     const secondLanguageFirstChoiceIndex =
       data[secondLanguageKey].snippets.length;
@@ -348,9 +241,9 @@ function fetchData() {
 function showLanguage(language) {
   showComments();
   setActiveButton(language);
-  console.log('show language: ' + language);
+  //console.log('show language: ' + language);
   fetchData().then((data) => {
-    // console.log(data);
+    //console.log(data);
     const langData = data[language];
     content.innerHTML = `
           <h2>${langData.name}</h2>
@@ -387,7 +280,7 @@ function showLanguage(language) {
     document
       .getElementById('snippet')
       .addEventListener('change', function (event) {
-        const snippetIndex = event.target.value;
+        const snippetIndex = event.target.value;        
         document.getElementById('snippetCode').innerText =
           langData.snippets[snippetIndex].code;
         // get the comments for the language and snippet

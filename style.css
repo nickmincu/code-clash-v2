@@ -268,12 +268,12 @@ footer p {
 
 #loginForm {
   display: flex;
-  align-items: center;  
+  align-items: center;
 }
 
 #loginForm label,
 #loginForm input {
-  margin: 0px 5px 12px;    
+  margin: 0px 5px 12px;
 }
 
 /* Container div */
@@ -285,7 +285,7 @@ footer p {
   font-size: 24px;
   width: 50px;
   height: 50px;
-  background-color:#f7c924; /* Add your desired background color */
+  background-color: #f7c924; /* Add your desired background color */
   border-radius: 50%; /* Changes the shape to a circle */
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Optional, adds a subtle shadow */
   cursor: pointer;
@@ -294,9 +294,8 @@ footer p {
 /* Icon styling */
 #user-icon .fas {
   font-size: 24px;
-  color: #444; /* Add your desired icon color */  
+  color: #444; /* Add your desired icon color */
 }
-
 
 .star {
   font-size: 40px;
@@ -304,7 +303,7 @@ footer p {
   background: none;
   color: gray;
   background: none;
-  border: none;  
+  border: none;
   padding: 0;
   margin: 0px 0px 0px;
   outline: none;
@@ -313,7 +312,6 @@ footer p {
 .yellow {
   color: gold;
 }
-
 
 /* Mobile Responsiveness */
 @media screen and (max-width: 768px) {
@@ -346,7 +344,7 @@ footer p {
   nav.show-menu ul {
     display: block;
   }
-/* 
+  /* 
   #loginForm {
     display: inherit;
   }
@@ -356,18 +354,17 @@ footer p {
   }
 
  */
- #loginForm {
-  flex-direction: column; /* Set the direction of the form elements to columnar */
-}
+  #loginForm {
+    flex-direction: column; /* Set the direction of the form elements to columnar */
+  }
 
-#loginForm label,
-#loginForm input {
-  display: block; /* Set the labels and inputs to display as block elements */
-  margin: 5px 0; /* Adjust the margin for better spacing */
-}
+  #loginForm label,
+  #loginForm input {
+    display: block; /* Set the labels and inputs to display as block elements */
+    margin: 5px 0; /* Adjust the margin for better spacing */
+  }
 
-#user-icon {
-  margin-top: 10px; /* Add top margin to separate the button from input fields */
-}
-
+  #user-icon {
+    margin-top: 10px; /* Add top margin to separate the button from input fields */
+  }
 }
