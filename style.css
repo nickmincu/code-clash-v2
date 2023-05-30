@@ -297,6 +297,16 @@ footer p {
   color: #444; /* Add your desired icon color */  
 }
 
+
+.star {
+  font-size: 30px;
+  cursor: pointer;
+}
+.yellow {
+  color: gold;
+}
+
+
 /* Mobile Responsiveness */
 @media screen and (max-width: 768px) {
   nav li {

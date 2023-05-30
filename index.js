@@ -85,6 +85,57 @@ let username;
 let currentLanguage;
 let currentSnippet;
 
+
+
+// favorites
+
+const starBtn = document.getElementById('starBtn');
+
+        async function fetchIsFavorite() {
+            const response = await fetch("https://codeclashserver20230524010610.azurewebsites.net/Favorites/isfavorite", {
+                method: "POST",
+                headers: {"Content-Type": "application/json-patch+json"},
+                body: JSON.stringify({
+                    "username": "user_a@gmail.com",
+                    "language": "JavaScript",
+                    "snippetName": "Hello, World!"
+                }),
+            });
+
+            if (response.ok && await response.json()) {
+                starBtn.classList.add('yellow');
+            }
+        }
+
+        async function toggleStar() {
+            const url = starBtn.classList.contains('yellow')
+                ? "https://codeclashserver20230524010610.azurewebsites.net/Favorites/remove"
+                : "https://codeclashserver20230524010610.azurewebsites.net/Favorites/add";
+
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {"Content-Type": "application/json-patch+json"},
+                body: JSON.stringify({
+                    "username": "user_a@gmail.com",
+                    "language": "JavaScript",
+                    "snippetName": "Hello, World!"
+                }),
+            });
+
+            if (response.ok) {
+                starBtn.classList.toggle('yellow');
+            }
+        }
+        
+        fetchIsFavorite();
+        starBtn.addEventListener('click', toggleStar);
+
+
+
+// end favorites
+
+
+
 function showComparison() {
   fetchData().then((data) => {
     content.innerHTML = `
