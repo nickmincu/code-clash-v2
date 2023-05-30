@@ -337,7 +337,7 @@ function showComparison() {
 }
 
 function fetchData() {
-  // console.log('fetch data');
+  // we need to get this from github (the only exception) because stackblitz doesnt allow static resources.
   return fetch(
     'https://raw.githubusercontent.com/nickmincu/code-clash-v2/main/data.json'
   )
