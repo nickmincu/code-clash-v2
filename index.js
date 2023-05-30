@@ -406,9 +406,11 @@ function favoritesButtonLogic(user, language, snippetName) {
   const favoritesBtn = document.getElementById('favoritesBtn');
 
   // hide the bookmark button if the username is not defined (when is not logged in)
-  if (username == undefined) {
-    favoritesBtn.style.display = 'none';
-  } else favoritesBtn.style.display = 'block';
+  if (favoritesBtn) {
+    if (username === undefined) {
+      favoritesBtn.style.display = 'none';
+    } else favoritesBtn.style.display = 'block';
+  }
 
   async function fetchIsBtnFavorite() {
     const response = await fetch(
@@ -450,7 +452,7 @@ function favoritesButtonLogic(user, language, snippetName) {
   }
   fetchIsBtnFavorite();
 
-  if (favBtnHandle != undefined) {
+  if (favBtnHandle != undefined && favoritesBtn) {
     // remove the previously assigned event handler
     favoritesBtn.removeEventListener('click', favBtnHandle);
   }
@@ -460,7 +462,9 @@ function favoritesButtonLogic(user, language, snippetName) {
     //  favoritesBtn.removeEventListener('click', handleClick);
   };
 
-  favoritesBtn.addEventListener('click', favBtnHandle);
+  if (favoritesBtn) {
+    favoritesBtn.addEventListener('click', favBtnHandle);
+  }
 
   // end favorites
 }
@@ -673,7 +677,9 @@ function logoutUser() {
   document.getElementById('signupContainer').style.display = 'none';
   document.getElementById('logoutContainer').style.display = 'none';
   document.getElementById('addComments').style.display = 'none';
-  document.getElementById('favoritesBtn').style.display = 'none';
+  if (document.getElementById('favoritesBtn')) {
+    document.getElementById('favoritesBtn').style.display = 'none';
+  }
 }
 
 function signupState() {
