@@ -262,61 +262,12 @@ function showLanguage(language) {
         currentLanguage = langData.name;
         currentSnippet = langData.snippets[snippetIndex].title;
         fetchComments(currentLanguage, currentSnippet);
-
         favoritesButtonLogic(username, currentLanguage, currentSnippet);
-        //   // favorites
-        //   const favoritesBtn = document.getElementById('favoritesBtn');
-
-        //   // hide the bookmark button if the username is not defined (when is not logged in)
-        //   if (username == undefined) {
-        //     favoritesBtn.style.display = 'none';
-        //   } else favoritesBtn.style.display = 'block';
-
-        //   async function fetchIsBtnFavorite() {
-        //     const response = await fetch(
-        //       'https://codeclashserver20230524010610.azurewebsites.net/Favorites/isfavorite',
-        //       {
-        //         method: 'POST',
-        //         headers: { 'Content-Type': 'application/json-patch+json' },
-        //         body: JSON.stringify({
-        //           username: username,
-        //           language: currentLanguage,
-        //           snippetName: currentSnippet,
-        //         }),
-        //       }
-        //     );
-
-        //     if (response.ok && (await response.json())) {
-        //       favoritesBtn.classList.add('yellow');
-        //     } else favoritesBtn.classList.remove('yellow');
-        //   }
-
-        //   async function toggleBtnStar() {
-        //     const url = favoritesBtn.classList.contains('yellow')
-        //       ? 'https://codeclashserver20230524010610.azurewebsites.net/Favorites/remove'
-        //       : 'https://codeclashserver20230524010610.azurewebsites.net/Favorites/add';
-
-        //     const response = await fetch(url, {
-        //       method: 'POST',
-        //       headers: { 'Content-Type': 'application/json-patch+json' },
-        //       body: JSON.stringify({
-        //         username: username,
-        //         language: currentLanguage,
-        //         snippetName: currentSnippet,
-        //       }),
-        //     });
-
-        //     if (response.ok) {
-        //       favoritesBtn.classList.toggle('yellow');
-        //     }
-        //   }
-        //   fetchIsBtnFavorite();
-        //   favoritesBtn.addEventListener('click', toggleBtnStar);
-
-        //  // end favorites
       });
   });
 }
+
+let favBtnHandle;
 
 function favoritesButtonLogic(user, language, snippetName) {
   // favorites
@@ -366,7 +317,18 @@ function favoritesButtonLogic(user, language, snippetName) {
     }
   }
   fetchIsBtnFavorite();
-  favoritesBtn.addEventListener('click', toggleBtnStar);
+  
+  if (favBtnHandle != undefined) {
+    // remove the previously assigned event handler
+    favoritesBtn.removeEventListener('click', favBtnHandle);
+  }
+
+  favBtnHandle = () => {
+    toggleBtnStar();
+    //  favoritesBtn.removeEventListener('click', handleClick);
+  };
+
+  favoritesBtn.addEventListener('click', favBtnHandle);
 
   // end favorites
 }
@@ -502,7 +464,7 @@ function loginUser(email, password) {
       }
       globalIdToken = result.idToken; // Save the JWT token
       username = email;
-      loggedInState();
+      loggedInState();      
     })
     .catch((error) => {
       console.log('error', error);
@@ -568,7 +530,8 @@ function loggedInState() {
   document.getElementById('loginContainer').style.display = 'none';
   document.getElementById('signupContainer').style.display = 'none';
   document.getElementById('logoutContainer').style.display = 'block';
-  document.getElementById('addComments').style.display = 'block';
+  document.getElementById('addComments').style.display = 'block';  
+  favoritesButtonLogic(username, currentLanguage, currentSnippet);
 }
 
 function logoutUser() {
